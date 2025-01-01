@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const ForgotPasswordOTP = () => {
   const { otp, setOtp } = useState("");
-  const {newpassword, setNewPassword} = useState("");
-  const {confirmPassword, setConfirmPassword} = useState("");
+  const [newpassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data) => {

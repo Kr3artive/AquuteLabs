@@ -4,11 +4,14 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaApple } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { login } = useContext(AuthContext);
   const { email, setEmail } = useState("");
   const { password, setPassword } = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
   const {
     register,
@@ -16,9 +19,14 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    await login(email, password);
+  const handleLogin = async () => {
+    try {
+      await login(email, password);
+      // navigate("/");
+    } catch (error) {
+      setErrorMessage("INVALID EMAIL OR PASSWORD.");
+      console.error(error);
+    }
   };
 
   return (
@@ -28,7 +36,11 @@ const Login = () => {
           Welcome to Equipment.ng
         </h1>
         <p className="text-center text-black mb-6">Log in to Equipment.ng</p>
-
+        {errorMessage && (
+          <div className="text-sm text-red-500 mt-1 mb-1 text-center">
+            {errorMessage}
+          </div>
+        )}
         <form onSubmit={handleSubmit(handleLogin)}>
           <div className="mb-4">
             <input
@@ -85,11 +97,17 @@ const Login = () => {
                 className="h-4 w-4 text-yellow-600 border-gray-300 rounded focus:ring-yellow-500"
                 {...register("remember")}
               />
-              <label htmlFor="remember" className="ml-2 block text-black sm:text-xs md:text-md lg:text-md">
+              <label
+                htmlFor="remember"
+                className="ml-2 block text-black sm:text-xs md:text-md lg:text-md"
+              >
                 Remember me
               </label>
             </div>
-            <Link to={"/forgot-password"} className="sm:text-xs md:text-md lg:text-md font-bold text-amber-500 hover:underline">
+            <Link
+              to={"/forgot-password"}
+              className="sm:text-xs md:text-md lg:text-md font-bold text-amber-500 hover:underline"
+            >
               Forgot password?
             </Link>
           </div>
@@ -107,7 +125,9 @@ const Login = () => {
             type="button"
             className="flex items-center gap-1 justify-center w-full px-4 py-2 border border-gray-300 rounded-full shadow-sm text-sm font-medium text-black hover:bg-gray-50"
           >
-            <div><FaApple /></div> 
+            <div>
+              <FaApple />
+            </div>
             <h2>Sign up with Apple</h2>
           </button>
           <button
@@ -115,7 +135,7 @@ const Login = () => {
             className="flex items-center gap-1 justify-center w-full px-4 py-2 border border-gray-300 rounded-full shadow-sm text-sm font-medium text-black hover:bg-gray-50"
           >
             <div>
-            <FcGoogle />
+              <FcGoogle />
             </div>
             <h2>Sign up with Google</h2>
           </button>
@@ -123,7 +143,10 @@ const Login = () => {
 
         <p className="mt-6 text-center text-black sm:text-xs md:text-md lg:text-md">
           Don’t have an account?{" "}
-          <Link to={"/signup"} className="text-amber-500 hover:underline font-bold">
+          <Link
+            to={"/signup"}
+            className="text-amber-500 hover:underline font-bold"
+          >
             Create an account
           </Link>
         </p>
