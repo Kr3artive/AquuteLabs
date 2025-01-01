@@ -6,7 +6,7 @@ const nodemailer = require("nodemailer"); // For sending emails
 const User = require("../models/Users"); // Mongoose model for User
 
 // Registration endpoint
-const register = async (req, res) => {
+const signup = async (req, res) => {
   const { surname, name, email, password } = req.body;
   const secret = process.env.JWT_KEY; // JWT secret key from environment variables
 
@@ -270,4 +270,4 @@ const resetPassword = async (req, res) => {
 };
 
 // Export all controller functions
-module.exports = { register, verifyOtp, login, forgotPassword, resetPassword };
+module.exports = { signup, verifyOtp, login, forgotPassword, resetPassword };

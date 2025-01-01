@@ -1,4 +1,4 @@
-import {useState, useContext} from "react";
+import { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 // import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
@@ -33,9 +33,9 @@ const Login = () => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className={`mt-1 block w-full px-3 py-2 border ${
+              className={`mt-1 block w-full px-3 py-3 border ${
                 errors.email ? "border-red-500" : "border-gray-300"
-              } rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm`}
+              } rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-600 sm:text-sm`}
               placeholder="Email"
               {...register("email", {
                 required: "Email is required",
@@ -51,18 +51,12 @@ const Login = () => {
               </p>
             )}
           </div>
-
           <div className="mb-4">
-            <label
-              className="block text-sm font-medium text-gray-700"
-              htmlFor="password"
-            >
-              Password
-            </label>
             <input
               type="password"
-              id="password"
-              className={`mt-1 block w-full px-3 py-2 border ${
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className={`mt-1 block w-full px-3 py-3 border ${
                 errors.password ? "border-red-500" : "border-gray-300"
               } rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm`}
               placeholder="Password"
@@ -89,21 +83,18 @@ const Login = () => {
                 className="h-4 w-4 text-yellow-600 border-gray-300 rounded focus:ring-yellow-500"
                 {...register("remember")}
               />
-              <label
-                htmlFor="remember"
-                className="ml-2 block text-sm text-gray-900"
-              >
+              <label htmlFor="remember" className="ml-2 block text-black">
                 Remember me
               </label>
             </div>
-            <a href="#" className="text-sm text-yellow-600 hover:underline">
+            <a href="#" className=" font-bold text-amber-500 hover:underline">
               Forgot password?
             </a>
           </div>
 
           <button
             type="submit"
-            className="w-full py-2 px-4 bg-yellow-500 text-white rounded-md shadow hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2"
+            className="w-full rounded-full py-4 px-4 bg-amber-500 text-white font-bold shadow hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2"
           >
             Log In
           </button>
@@ -112,23 +103,23 @@ const Login = () => {
         <div className="mt-6 flex items-center justify-center space-x-4">
           <button
             type="button"
-            className="flex items-center justify-center w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50"
+            className="flex items-center justify-center w-full px-4 py-2 border border-gray-300 rounded-full shadow-sm text-sm font-medium text-black hover:bg-gray-50"
           >
             <img src="apple-icon.png" alt="Apple" className="h-5 mr-2" /> Sign
             up with Apple
           </button>
           <button
             type="button"
-            className="flex items-center justify-center w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50"
+            className="flex items-center justify-center w-full px-4 py-2 border border-gray-300 rounded-full shadow-sm text-sm font-medium text-black hover:bg-gray-50"
           >
             <img src="google-icon.png" alt="Google" className="h-5 mr-2" /> Sign
             up with Google
           </button>
         </div>
 
-        <p className="mt-6 text-center text-sm text-gray-500">
+        <p className="mt-6 text-center text-black">
           Don’t have an account?{" "}
-          <a href="#" className="text-yellow-600 hover:underline">
+          <a href="#" className="text-amber-500 hover:underline font-bold">
             Create an account
           </a>
         </p>
