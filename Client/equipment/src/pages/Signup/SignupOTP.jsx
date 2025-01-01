@@ -57,7 +57,7 @@ const SignupOTP = () => {
               className={`mt-1 block w-full px-3 py-3 border ${
                 errors.otp ? "border-red-500" : "border-gray-300"
               } rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-600 sm:text-sm`}
-              placeholder="Code"
+              placeholder="OTP Code"
               {...register("otp", {
                 required: "OTP is required",
                 minLength: {
