@@ -1,6 +1,12 @@
-import React from "react";
+import { useForm } from "react-hook-form";
 
 const ForgotPassword = () => {
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data); // Handle password recovery logic here
+  };
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-sm p-6 bg-white rounded-lg shadow-md">
@@ -11,12 +17,13 @@ const ForgotPassword = () => {
           Put in your email to recover password
         </p>
 
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
             <input
               type="email"
               className="mt-1 block w-full px-3 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-600 sm:text-sm"
               placeholder="Email"
+              {...register("email")} // Registers the email input
             />
           </div>
 

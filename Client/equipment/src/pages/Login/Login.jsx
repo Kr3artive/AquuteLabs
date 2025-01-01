@@ -1,7 +1,9 @@
 import { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
-// import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
+import { Link } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
+import { FaApple } from "react-icons/fa6";
 
 const Login = () => {
   const { login } = useContext(AuthContext);
@@ -83,13 +85,13 @@ const Login = () => {
                 className="h-4 w-4 text-yellow-600 border-gray-300 rounded focus:ring-yellow-500"
                 {...register("remember")}
               />
-              <label htmlFor="remember" className="ml-2 block text-black">
+              <label htmlFor="remember" className="ml-2 block text-black sm:text-xs md:text-md lg:text-md">
                 Remember me
               </label>
             </div>
-            <a href="#" className=" font-bold text-amber-500 hover:underline">
+            <Link to={"/forgot-password"} className="sm:text-xs md:text-md lg:text-md font-bold text-amber-500 hover:underline">
               Forgot password?
-            </a>
+            </Link>
           </div>
 
           <button
@@ -103,25 +105,27 @@ const Login = () => {
         <div className="mt-6 flex items-center justify-center space-x-4">
           <button
             type="button"
-            className="flex items-center justify-center w-full px-4 py-2 border border-gray-300 rounded-full shadow-sm text-sm font-medium text-black hover:bg-gray-50"
+            className="flex items-center gap-1 justify-center w-full px-4 py-2 border border-gray-300 rounded-full shadow-sm text-sm font-medium text-black hover:bg-gray-50"
           >
-            <img src="apple-icon.png" alt="Apple" className="h-5 mr-2" /> Sign
-            up with Apple
+            <div><FaApple /></div> 
+            <h2>Sign up with Apple</h2>
           </button>
           <button
             type="button"
-            className="flex items-center justify-center w-full px-4 py-2 border border-gray-300 rounded-full shadow-sm text-sm font-medium text-black hover:bg-gray-50"
+            className="flex items-center gap-1 justify-center w-full px-4 py-2 border border-gray-300 rounded-full shadow-sm text-sm font-medium text-black hover:bg-gray-50"
           >
-            <img src="google-icon.png" alt="Google" className="h-5 mr-2" /> Sign
-            up with Google
+            <div>
+            <FcGoogle />
+            </div>
+            <h2>Sign up with Google</h2>
           </button>
         </div>
 
-        <p className="mt-6 text-center text-black">
+        <p className="mt-6 text-center text-black sm:text-xs md:text-md lg:text-md">
           Don’t have an account?{" "}
-          <a href="#" className="text-amber-500 hover:underline font-bold">
+          <Link to={"/signup"} className="text-amber-500 hover:underline font-bold">
             Create an account
-          </a>
+          </Link>
         </p>
       </div>
     </div>

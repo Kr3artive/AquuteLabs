@@ -4,6 +4,7 @@ import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import ForgotPassword from "./pages/Login/ForgotPassword";
 import RegistrationOTP from "./pages/Signup/RegistrationOTP";
+import ForgotPasswordOTP from "./pages/Login/ForgotPasswordOTP";
 const App = () => {
   return (
     <div className="overflow-hidden">
@@ -13,6 +14,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path='/forgot-password' element={<ForgotPassword/>} />
+          <Route path='/forgot-password/otp' element={<ForgotPasswordOTP/>} />
           <Route path="/signup" element={<Signup/>} />
           <Route path='/signup/otp' element={<RegistrationOTP/>} />
         </Routes>
