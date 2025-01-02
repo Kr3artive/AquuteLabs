@@ -4,11 +4,16 @@ import "./index.css";
 import App from "./App.jsx";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
 import EquipmentProvider from "./contexts/EquipmentContext.jsx";
+import SmallScreenProvider from "./contexts/SmallScreenContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
-      <App />
+      <EquipmentProvider>
+        <SmallScreenProvider>
+          <App />
+        </SmallScreenProvider>
+      </EquipmentProvider>
     </AuthProvider>
   </StrictMode>
 );
