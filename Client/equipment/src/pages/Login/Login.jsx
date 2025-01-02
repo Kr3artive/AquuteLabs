@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../contexts/AuthContext";
 import { Link } from "react-router-dom";
@@ -8,9 +8,8 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { login } = useContext(AuthContext);
-  const { email, setEmail } = useState("");
-  const { password, setPassword } = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
 
   const {
@@ -19,19 +18,30 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const handleLogin = async () => {
+  const handleLogin = async (data) => {
     try {
-      await login(email, password);
-      // navigate("/");
+      await login(data.email, data.password);
+      setSuccessMessage(`AUTHENTICATED AS ${data.email}`);
+      setTimeout(() => {
+        setSuccessMessage("");
+        navigate("/");
+      }, 5000);
     } catch (error) {
-      setErrorMessage("INVALID EMAIL OR PASSWORD.");
+      setErrorMessage(
+        error.response?.data?.message || "INVALID EMAIL OR PASSWORD."
+      );
       console.error(error);
     }
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
+      <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md relative">
+        {successMessage && (
+          <div className="absolute top-0 left-0 w-full p-4 text-center text-sm font-bold text-black bg-green-400 rounded-md shadow-md">
+            {successMessage}
+          </div>
+        )}
         <h1 className="text-2xl font-bold text-center mb-2">
           Welcome to Equipment.ng
         </h1>
@@ -45,8 +55,6 @@ const Login = () => {
           <div className="mb-4">
             <input
               type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
               className={`mt-1 block w-full px-3 py-3 border ${
                 errors.email ? "border-red-500" : "border-gray-300"
               } rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-600 sm:text-sm`}
@@ -68,8 +76,6 @@ const Login = () => {
           <div className="mb-4">
             <input
               type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
               className={`mt-1 block w-full px-3 py-3 border ${
                 errors.password ? "border-red-500" : "border-gray-300"
               } rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm`}
@@ -125,18 +131,14 @@ const Login = () => {
             type="button"
             className="flex items-center gap-1 justify-center w-full px-4 py-2 border border-gray-300 rounded-full shadow-sm text-sm font-medium text-black hover:bg-gray-50"
           >
-            <div>
-              <FaApple />
-            </div>
+            <FaApple />
             <h2>Sign up with Apple</h2>
           </button>
           <button
             type="button"
             className="flex items-center gap-1 justify-center w-full px-4 py-2 border border-gray-300 rounded-full shadow-sm text-sm font-medium text-black hover:bg-gray-50"
           >
-            <div>
-              <FcGoogle />
-            </div>
+            <FcGoogle />
             <h2>Sign up with Google</h2>
           </button>
         </div>

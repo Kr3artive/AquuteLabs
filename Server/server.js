@@ -11,7 +11,7 @@ server.use(express.json());
 const PORT = process.env.PORT;
 const mongodb = process.env.MongoUrl;
 
-const Auth = require('./src/routes/Auth');
+const authRoutes = require('./src/routes/Auth');
 
 mongoose
   .connect(mongodb, {
@@ -21,7 +21,7 @@ mongoose
   .then(() => console.log("CONNECTED TO DATABASE"))
   .catch((error) => console.log("CONNECTION ERROR", error));
 
-server.use("/auth", Auth)
+server.use("/auth", authRoutes);
 // app.use("/post", postRoutes)
 // app.use("/comments", commentsRoutes)
 

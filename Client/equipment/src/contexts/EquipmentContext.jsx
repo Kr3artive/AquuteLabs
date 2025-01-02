@@ -1,4 +1,5 @@
-import {useState, useEffect, createContext } from "react";
+import { useState, useEffect, createContext } from "react";
+import axios from "axios";
 
 export const EquipmentContext = createContext();
 
@@ -6,12 +7,18 @@ const EquipmentProvider = ({ children }) => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    // Example API call, replace with actual API logic
-    fetch('/api/equipment')
-      .then((response) => response.json())
-      .then((data) => setItems(data)) // Ensure that `data` is an array
-      .catch((error) => console.error(error));
+    const fetchEquipment = async () => {
+      try {
+        const response = await axios.get("/api/equipment");
+        setItems(response.data);
+      } catch (error) {
+        console.error("Error fetching equipment:", error);
+      }
+    };
+
+    fetchEquipment();
   }, []);
+
   return (
     <EquipmentContext.Provider value={{ items }}>
       {children}
