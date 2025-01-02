@@ -12,6 +12,7 @@ const PORT = process.env.PORT;
 const mongodb = process.env.MongoUrl;
 
 const authRoutes = require('./src/routes/Auth');
+const equipmentRoutes = require('./src/routes/Equipment');
 
 mongoose
   .connect(mongodb, {
@@ -22,8 +23,7 @@ mongoose
   .catch((error) => console.log("CONNECTION ERROR", error));
 
 server.use("/auth", authRoutes);
-// app.use("/post", postRoutes)
-// app.use("/comments", commentsRoutes)
+server.use("/equipment", equipmentRoutes);
 
 server.listen(PORT, () => {
   console.log("SERVER IS ACTIVE AT http://localhost:4000");
