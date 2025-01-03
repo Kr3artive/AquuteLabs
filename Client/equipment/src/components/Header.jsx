@@ -63,7 +63,7 @@ const Header = () => {
           </div>
         </div>
         <Link to={"/login"}>
-          <img src={DP} alt="User" />
+          <img src={DP} alt="User" className="w-10 h-10 md:w-14 md:h-14 rounded-full" />
         </Link>
       </div>
     </header>
