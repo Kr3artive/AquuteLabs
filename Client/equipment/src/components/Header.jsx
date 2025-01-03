@@ -6,6 +6,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { MdClose } from "react-icons/md";
 import { FaSearch } from "react-icons/fa";
 import { SmallScreenContext } from "../contexts/SmallScreenContext";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const { nav, handleSmall } = useContext(SmallScreenContext);
@@ -61,9 +62,9 @@ const Header = () => {
             <MdOutlineQueue size={30} />
           </div>
         </div>
-        <div>
+        <Link to={"/login"}>
           <img src={DP} alt="User" />
-        </div>
+        </Link>
       </div>
     </header>
   );
